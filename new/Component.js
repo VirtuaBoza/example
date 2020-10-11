@@ -15,7 +15,7 @@ import compose from "../compose";
 class Component extends React.Component {
   componentDidMount() {
     const { service } = this.props;
-    service?.fetchData();
+    service.fetchData();
   }
 
   handleIncrementClick = () => {
