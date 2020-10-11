@@ -14,7 +14,7 @@ export class DataStore {
   }
 
   incrementCounter() {
-    this.counter++;
+    this._counter++;
   }
 }
 

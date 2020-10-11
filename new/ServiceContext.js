@@ -12,7 +12,7 @@ import { DataStoreContext } from "./DataStore";
 // in a single ServiceContext.Provider which maintains the
 // single-instance concept while ditching the singleton pattern
 // and allowing dependencies to be supplied via Context.
-const ServiceContext = React.createContext();
+export const ServiceContext = React.createContext();
 
 // The ServiceProvider contains the definitions of Service functions.
 // It gets its Store dependencies via Context,
@@ -24,12 +24,11 @@ export const ServiceProvider = ({ children }) => {
   const [provider, setProvider] = useState();
 
   useEffect(() => {
-    (async () => {
-      if (configStore.provider) {
-        const Provider = await import(`./${configStore.provider}`);
-        setProvider(new Provider(dataStore));
-      }
-    })();
+    if (configStore.provider) {
+      import(`./${configStore.provider}`).then((module) => {
+        setProvider(new module.default(dataStore));
+      });
+    }
   }, [configStore.provider, dataStore]);
 
   const fetchData = useCallback(() => {
@@ -39,9 +38,8 @@ export const ServiceProvider = ({ children }) => {
   }, [provider, dataStore]);
 
   const service = useMemo(() => {
-    initialized = Boolean(provider);
     fetchData;
-  }, [provider, fetchData]);
+  }, [fetchData]);
 
   return (
     <ServiceContext.Provider value={service}>

@@ -14,8 +14,13 @@ import compose from "../compose";
  */
 class Component extends React.Component {
   componentDidMount() {
+    console.log(this.props);
     const { service } = this.props;
-    service.fetchData();
+    service?.fetchData();
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
   }
 
   handleIncrementClick = () => {
@@ -29,6 +34,7 @@ class Component extends React.Component {
   };
 
   render() {
+    console.log("rendered with props", this.props);
     const {
       config: { reloadEnabled },
       dataStore: { data, counter },
