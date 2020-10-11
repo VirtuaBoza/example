@@ -17,6 +17,10 @@ class Component extends React.Component {
     service.fetchData();
   }
 
+  handleIncrementClick = () => {
+    dataStore.counter++;
+  };
+
   handleReloadClick = () => {
     service.fetchData();
   };
@@ -25,10 +29,12 @@ class Component extends React.Component {
     const {
       config: { reloadEnabled },
     } = this.props;
-    const { data } = dataStore;
+    const { data, counter } = dataStore;
     const { darkMode } = configStore;
     return (
       <div className={darkMode ? "dark" : "light"}>
+        <button onClick={this.handleIncrementClick}>Increment</button>
+        <div data-testid="count">{counter}</div>
         {reloadEnabled && (
           <button onClick={this.handleReloadClick}>Reload</button>
         )}

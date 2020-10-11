@@ -6,9 +6,7 @@ import dataStore from "./dataStore";
  */
 class ProviderTwo {
   fetchData() {
-    return Promise.resolve(
-      [].filter((item) => item.id === dataStore.otherData)
-    );
+    return Promise.resolve([].filter((item) => item.id === dataStore.counter));
   }
 }
 

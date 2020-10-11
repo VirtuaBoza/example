@@ -5,7 +5,7 @@ import { observable } from "mobx";
  */
 const dataStore = observable({
   data: [],
-  otherData: "",
+  counter: 0,
 });
 
 export default dataStore;
