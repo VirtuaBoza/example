@@ -12,7 +12,7 @@ jest.mock("./Service");
 
 // Meanwhile, who knows what the state of the configStore (or other stores) is at any point?
 
-describe.skip("Component", () => {
+describe("Component", () => {
   beforeEach(() => {
     // Failing to reset this state before each test would make
     // one of the tests fail.
