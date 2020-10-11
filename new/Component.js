@@ -14,13 +14,8 @@ import compose from "../compose";
  */
 class Component extends React.Component {
   componentDidMount() {
-    console.log(this.props);
     const { service } = this.props;
     service?.fetchData();
-  }
-
-  componentDidUpdate() {
-    console.log(this.props);
   }
 
   handleIncrementClick = () => {
@@ -34,15 +29,16 @@ class Component extends React.Component {
   };
 
   render() {
-    console.log("rendered with props", this.props);
     const {
       config: { reloadEnabled },
       dataStore: { data, counter },
       configStore: { darkMode },
+      service,
     } = this.props;
 
     return (
       <>
+        {service && <div>service is defined</div>}
         <div className={darkMode ? "dark" : "light"}>
           <button onClick={this.handleIncrementClick}>Increment</button>
           <div data-testid="count">{counter}</div>

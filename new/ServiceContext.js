@@ -32,14 +32,19 @@ export const ServiceProvider = ({ children }) => {
   }, [configStore.provider, dataStore]);
 
   const fetchData = useCallback(() => {
-    provider.fetchData().then((data) => {
-      dataStore.data.push(...data);
-    });
+    if (provider) {
+      provider.fetchData().then((data) => {
+        dataStore.data.push(...data);
+      });
+    }
   }, [provider, dataStore]);
 
-  const service = useMemo(() => {
-    fetchData;
-  }, [fetchData]);
+  const service = useMemo(
+    () => ({
+      fetchData,
+    }),
+    [fetchData]
+  );
 
   return (
     <ServiceContext.Provider value={service}>
