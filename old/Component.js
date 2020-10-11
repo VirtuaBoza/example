@@ -19,7 +19,7 @@ class Component extends React.Component {
   }
 
   handleIncrementClick = () => {
-    dataStore.counter++;
+    dataStore.counter++; // This is a no-no. Updates to store state should be made via method calls on the store (AKA "actions")
   };
 
   handleReloadClick = () => {

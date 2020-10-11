@@ -1,10 +1,9 @@
 import React from "react";
-import Service from "./Service";
-import configStore from "./configStore";
+import { withService } from "./ServiceContext";
 import { observer } from "mobx-react";
 import { withDataStore } from "./dataStore";
-
-const service = new Service();
+import { withConfigStore } from "./configStore";
+import compose from "../compose";
 
 /**
  * This is a component. It re-renders on changes to the global stores
@@ -15,15 +14,17 @@ const service = new Service();
  */
 class Component extends React.Component {
   componentDidMount() {
+    const { service } = this.props;
     service.fetchData();
   }
 
   handleIncrementClick = () => {
     const { dataStore } = this.props;
-    dataStore.counter++;
+    dataStore.incrementCounter();
   };
 
   handleReloadClick = () => {
+    const { service } = this.props;
     service.fetchData();
   };
 
@@ -31,23 +32,31 @@ class Component extends React.Component {
     const {
       config: { reloadEnabled },
       dataStore: { data, counter },
+      configStore: { darkMode },
     } = this.props;
-    const { darkMode } = configStore;
+
     return (
-      <div className={darkMode ? "dark" : "light"}>
-        <button onClick={this.handleIncrementClick}>Increment</button>
-        <div data-testid="count">{counter}</div>
-        {reloadEnabled && (
-          <button onClick={this.handleReloadClick}>Reload</button>
-        )}
-        {data.map((item) => (
-          <div key={item.id} data-testid="item">
-            {item.name}
-          </div>
-        ))}
-      </div>
+      <>
+        <div className={darkMode ? "dark" : "light"}>
+          <button onClick={this.handleIncrementClick}>Increment</button>
+          <div data-testid="count">{counter}</div>
+          {reloadEnabled && (
+            <button onClick={this.handleReloadClick}>Reload</button>
+          )}
+          {data.map((item) => (
+            <div key={item.id} data-testid="item">
+              {item.name}
+            </div>
+          ))}
+        </div>
+      </>
     );
   }
 }
 
-export default withDataStore(observer(Component));
+export default compose(
+  withService,
+  withConfigStore,
+  withDataStore,
+  observer
+)(Component);

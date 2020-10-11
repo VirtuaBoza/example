@@ -1,4 +1,4 @@
-import dataStore from "./dataStore";
+import dataStore from "./DataStore";
 
 /**
  * This is a "Provider" - a specific implementation of an integration with some external system.

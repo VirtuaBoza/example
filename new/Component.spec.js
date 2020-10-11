@@ -1,17 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Component from "./Component";
-import { DataStore, DataStoreProvider } from "./dataStore";
 
-jest.mock("./Manager");
-
-describe.skip("Component", () => {
+describe("Component", () => {
   test("something", () => {
-    render(
-      <DataStoreProvider store={new DataStore()}>
-        <Component config={{ reloadEnabled: true }} />
-      </DataStoreProvider>
-    );
+    render(<Component config={{ reloadEnabled: true }} />);
     const count = screen.getByTestId("count");
     expect(count.innerHTML).toBe("0");
     fireEvent.click(screen.getByText("Increment"));
@@ -19,11 +12,7 @@ describe.skip("Component", () => {
   });
 
   test("the same thing", () => {
-    render(
-      <DataStoreProvider store={new DataStore()}>
-        <Component config={{ reloadEnabled: true }} />
-      </DataStoreProvider>
-    );
+    render(<Component config={{ reloadEnabled: true }} />);
     const count = screen.getByTestId("count");
     expect(count.innerHTML).toBe("0");
     fireEvent.click(screen.getByText("Increment"));
@@ -31,11 +20,7 @@ describe.skip("Component", () => {
   });
 
   test("something else", async () => {
-    render(
-      <DataStoreProvider store={new DataStore()}>
-        <Component config={{ reloadEnabled: true }} />
-      </DataStoreProvider>
-    );
+    render(<Component config={{ reloadEnabled: true }} />);
     const items = await screen.findAllByTestId("item");
     expect(items.length).toBe(1);
   });
