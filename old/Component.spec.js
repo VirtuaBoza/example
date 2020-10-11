@@ -4,6 +4,8 @@ import React from "react";
 import "regenerator-runtime/runtime";
 import Component from "./Component";
 
+jest.mock("./Service");
+
 describe("Component", () => {
   test("something", async () => {
     render(<Component config={{ reloadEnabled: true }} />);
