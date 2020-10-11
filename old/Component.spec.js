@@ -6,8 +6,6 @@ import Component from "./Component";
 
 describe("Component", () => {
   test("something", async () => {
-    render(<Component />);
-    const results = await screen.findAllByTestId("item");
-    expect(results.length).toBe(0);
+    render(<Component config={{ reloadEnabled: true }} />);
   });
 });
