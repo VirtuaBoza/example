@@ -11,6 +11,7 @@ const service = new Service();
  * because it is wrapped in the `observer` HOC.
  * It may have it's own "config" object passed in
  * via props and/or rely on other configStore values.
+ * It may also manipulate global store values.
  */
 class Component extends React.Component {
   componentDidMount() {
