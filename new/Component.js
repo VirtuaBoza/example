@@ -1,8 +1,8 @@
 import React from "react";
 import { withService } from "./ServiceContext";
 import { observer } from "mobx-react";
-import { withDataStore } from "./dataStore";
-import { withConfigStore } from "./configStore";
+import { withDataStore } from "./DataStore";
+import { withConfigStore } from "./ConfigStore";
 import compose from "../compose";
 
 /**
