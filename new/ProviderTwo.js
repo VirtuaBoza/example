@@ -4,12 +4,12 @@
  */
 class ProviderTwo {
   constructor(dataStore) {
-    this.dataStore = dataStore;
+    this._dataStore = dataStore;
   }
 
   fetchData() {
     return Promise.resolve(
-      [].filter((item) => item.id === this.dataStore.otherData)
+      [].filter((item) => item.id === this._dataStore.otherData)
     );
   }
 }
