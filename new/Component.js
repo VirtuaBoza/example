@@ -59,6 +59,5 @@ class Component extends React.Component {
 export default compose(
   withService,
   withConfigStore,
-  withDataStore,
-  observer
-)(Component);
+  withDataStore
+)(observer(Component));
