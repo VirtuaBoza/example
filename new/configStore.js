@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { makeAutoObservable } from "mobx";
 
 export class ConfigStore {
@@ -16,22 +16,11 @@ export class ConfigStore {
 
 export const ConfigStoreContext = React.createContext();
 
-export const ConfigStoreProvider = ({
-  store = new ConfigStore(),
-  children,
-}) => {
+export const ConfigStoreProvider = ({ store, children }) => {
+  const [state] = useState(() => store || new ConfigStore());
   return (
-    <ConfigStoreContext.Provider value={store}>
+    <ConfigStoreContext.Provider value={state}>
       {children}
     </ConfigStoreContext.Provider>
   );
 };
-
-// For injecting the service as a prop into Class Components.
-// Function Components can use useContext(ConfigStoreContext) directly.
-export function withConfigStore(WrappedComponent) {
-  return React.forwardRef((props, ref) => {
-    const configStore = useContext(ConfigStoreContext);
-    return <WrappedComponent ref={ref} configStore={configStore} {...props} />;
-  });
-}

@@ -1,7 +1,7 @@
 import React from "react";
 import { ConfigStoreProvider } from "./ConfigStore";
 import { DataStoreProvider } from "./DataStore";
-import { ServiceProvider } from "./ServiceContext";
+import { ServiceProvider } from "./Service";
 
 const RootProvider = ({ children }) => {
   return (

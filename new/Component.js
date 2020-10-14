@@ -1,9 +1,9 @@
 import React from "react";
-import { withService } from "./ServiceContext";
 import { observer } from "mobx-react";
-import { withDataStore } from "./DataStore";
-import { withConfigStore } from "./ConfigStore";
-import compose from "../compose";
+import { ServiceContext } from "./Service";
+import { DataStoreContext } from "./DataStore";
+import { ConfigStoreContext } from "./ConfigStore";
+import withContext from "./withContext";
 
 /**
  * This is a component. It re-renders on changes to the global stores
@@ -56,8 +56,8 @@ class Component extends React.Component {
   }
 }
 
-export default compose(
-  withService,
-  withConfigStore,
-  withDataStore
-)(observer(Component));
+export default withContext({
+  service: ServiceContext,
+  dataStore: DataStoreContext,
+  configStore: ConfigStoreContext,
+})(observer(Component));

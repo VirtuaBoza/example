@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeAutoObservable } from "mobx";
 
 export class DataStore {
@@ -27,12 +27,3 @@ export const DataStoreProvider = ({ store = new DataStore(), children }) => {
     </DataStoreContext.Provider>
   );
 };
-
-// For injecting the service as a prop into Class Components.
-// Function Components can use useContext(DataStoreContext) directly.
-export function withDataStore(WrappedComponent) {
-  return React.forwardRef((props, ref) => {
-    const dataStore = useContext(DataStoreContext);
-    return <WrappedComponent ref={ref} dataStore={dataStore} {...props} />;
-  });
-}
