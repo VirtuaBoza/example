@@ -4,7 +4,7 @@ import compose from "../compose";
 /**
  * Takes a context map (ex. { configStore: ConfigStoreContext })
  * and returns a HOC which is supplied with props
- * with the map's keys and relative Context values.
+ * with the map's keys and respective Context values.
  */
 export default function withContext(contextMap) {
   return (component) =>
