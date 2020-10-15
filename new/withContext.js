@@ -20,3 +20,26 @@ export default function withContext(contextMap) {
       })
     )(component);
 }
+
+// TS
+// export default function withContext<
+//   OuterProps,
+//   ContextProps extends Record<string, any>
+// >(
+//   contextMap: { [P in keyof ContextProps]: React.Context<ContextProps[P]> }
+// ): (
+//   component: ComponentType<OuterProps & ContextProps>
+// ) => ComponentType<OuterProps> {
+//   return (component) =>
+//     compose(
+//       ...Object.entries(contextMap).map(([key, Context]) => {
+//         return (Component) => {
+//           return React.forwardRef((props, ref) => {
+//             const contextValue = useContext(Context);
+//             const contextProp = { [key]: contextValue };
+//             return <Component ref={ref} {...contextProp} {...props} />;
+//           });
+//         };
+//       })
+//     )(component);
+// }
