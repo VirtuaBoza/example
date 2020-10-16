@@ -23,15 +23,15 @@ export default function withContext(contextMap) {
 
 // TS
 // export default function withContext<
-//   OuterProps,
-//   ContextProps extends Record<string, any>
+//   OuterProps = {},
+//   ContextProps extends Record<string, any> = {}
 // >(
 //   contextMap: { [P in keyof ContextProps]: React.Context<ContextProps[P]> }
 // ): (
 //   component: ComponentType<OuterProps & ContextProps>
 // ) => ComponentType<OuterProps> {
-//   return (component) =>
-//     compose(
+//   return (component) => {
+//     return compose(
 //       ...Object.entries(contextMap).map(([key, Context]) => {
 //         return (Component) => {
 //           return React.forwardRef((props, ref) => {
@@ -42,4 +42,5 @@ export default function withContext(contextMap) {
 //         };
 //       })
 //     )(component);
+//   };
 // }
